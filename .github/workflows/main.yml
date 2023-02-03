@@ -1,9 +1,10 @@
-name: IAC
+name: Conviso IaC Scan
 on:
  push:
    branches: [ master ]
  pull_request:
    branches: [ master ]
+workflow_dispatch:
 
 jobs:
  conviso-iac:
@@ -12,9 +13,9 @@ jobs:
      image: convisoappsec/flowcli
      env:
        FLOW_API_KEY:  ${{secrets.CONVISO_API_KEY}}
-       FLOW_PROJECT_CODE: ${{secrets.PROJECT_KEY}}
+       FLOW_PROJECT_CODE: ${{secrets.CONVISO_PROJECT_CODE}}
    steps:
-   - uses: actions/checkout@v2
+   - uses: actions/checkout@v3
 
-   - name: Run iac
+   - name: Run IaC Scan
      run: conviso iac run
